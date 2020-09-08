@@ -13,4 +13,12 @@ repos:
           types: [file, python]
           entry: coverage run --source=./ -m unittest testing.test
           language: "python"
+          always_run: true
+
+        - id: coverage-report
+          name: "Create html coverage report"
+          types: [file, python]
+          entry: coverage html
+          language: "python"
+          always_run: true
 
