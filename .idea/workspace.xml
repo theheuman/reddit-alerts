@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d62578ac-4a36-445e-8c00-c62640eb3ae2" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1hEmr7sLKN7s5gNfrlcUvkvGiQE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.query_reddit_posts">
+    <configuration name="query_reddit_posts" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="reddit_post_alerts" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/query_reddit_posts.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test.TestQueryReddit.test_get_new_posts" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="reddit_post_alerts" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test.TestQueryReddit.test_get_new_posts&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.query_reddit_posts" />
+        <item itemvalue="Python tests.Unittests for test.TestQueryReddit.test_get_new_posts" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d62578ac-4a36-445e-8c00-c62640eb3ae2" name="Default Changelist" comment="" />
+      <created>1599584821154</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599584821154</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1919" y="856" width="597" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599593195646">
+      <screen x="1080" y="0" width="3840" height="2160" />
+    </state>
+    <state x="236" y="1001" width="597" height="396" key="#com.intellij.fileTypes.FileTypeChooser/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@0.240.1080.1920" timestamp="1599585177940" />
+    <state x="1919" y="856" key="#com.intellij.fileTypes.FileTypeChooser/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@1080.0.3840.2160" timestamp="1599593195646" />
+    <state width="600" height="565" key="GridCell.Tab.0.bottom" timestamp="1599593163275">
+      <screen x="1080" y="0" width="3840" height="2160" />
+    </state>
+    <state width="528" height="565" key="GridCell.Tab.0.bottom/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@0.240.1080.1920" timestamp="1599590019841" />
+    <state width="600" height="565" key="GridCell.Tab.0.bottom/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@1080.0.3840.2160" timestamp="1599593163275" />
+    <state width="600" height="565" key="GridCell.Tab.0.center" timestamp="1599593163275">
+      <screen x="1080" y="0" width="3840" height="2160" />
+    </state>
+    <state width="528" height="565" key="GridCell.Tab.0.center/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@0.240.1080.1920" timestamp="1599590019841" />
+    <state width="600" height="565" key="GridCell.Tab.0.center/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@1080.0.3840.2160" timestamp="1599593163275" />
+    <state width="600" height="565" key="GridCell.Tab.0.left" timestamp="1599593163274">
+      <screen x="1080" y="0" width="3840" height="2160" />
+    </state>
+    <state width="528" height="565" key="GridCell.Tab.0.left/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@0.240.1080.1920" timestamp="1599590019840" />
+    <state width="600" height="565" key="GridCell.Tab.0.left/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@1080.0.3840.2160" timestamp="1599593163274" />
+    <state width="600" height="565" key="GridCell.Tab.0.right" timestamp="1599593163275">
+      <screen x="1080" y="0" width="3840" height="2160" />
+    </state>
+    <state width="528" height="565" key="GridCell.Tab.0.right/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@0.240.1080.1920" timestamp="1599590019841" />
+    <state width="600" height="565" key="GridCell.Tab.0.right/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@1080.0.3840.2160" timestamp="1599593163275" />
+    <state x="29" y="834" key="SettingsEditor" timestamp="1599584894421">
+      <screen x="0" y="240" width="1080" height="1920" />
+    </state>
+    <state x="29" y="834" key="SettingsEditor/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@0.240.1080.1920" timestamp="1599584894421" />
+    <state x="213" y="640" width="618" height="783" key="find.popup" timestamp="1599593562416">
+      <screen x="0" y="240" width="1080" height="1920" />
+    </state>
+    <state x="213" y="640" width="618" height="783" key="find.popup/1080.0.3840.2160/4920.1080.1920.1080/0.240.1080.1920@1080.0.3840.2160" timestamp="1599593562416" />
+  </component>
+</project>
