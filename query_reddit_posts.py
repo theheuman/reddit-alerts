@@ -28,7 +28,7 @@ def parse_posts_from_json(json_data):
 
 def get_new_posts(posts: List[RedditPost], last_known_post: RedditPost):
     try:
-        new_posts = posts[:posts.index(last_known_post)]
+        new_posts = posts[: posts.index(last_known_post)]
         file_manipulation.update_last_known_post(LAST_KNOWN_POST_FILE_NAME, posts[0])
     except ValueError:
         # TODO throw error saying we cant find last post

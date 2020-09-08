@@ -8,12 +8,20 @@ from typing import List
 
 
 def get_mock_posts_from_file(file_name: str) -> List[RedditPost]:
-    with open("testing/input.json", 'r') as file:
+    with open("testing/input.json", "r") as file:
         content = file.read()
     post_dicts = jsonpickle.decode(content)
     posts = []
     for post in post_dicts:
-        posts.append(RedditPost(post['title'], post['link'], post['flair'], post['id'], post['external_link']))
+        posts.append(
+            RedditPost(
+                post["title"],
+                post["link"],
+                post["flair"],
+                post["id"],
+                post["external_link"],
+            )
+        )
     return posts
 
 
@@ -25,23 +33,23 @@ class TestRedditPost(unittest.TestCase):
 
     def test_str(self):
         mock_post_string_value = (
-            "title: [PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17" +
-            "\nlink: /r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/" +
-            "\nflair: Prebuilt" +
-            "\nid: iocyre" +
-            "\nexternal_link: https://www.amazon.com/gp/product/B088X2YR3X"
+            "title: [PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17"
+            + "\nlink: /r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/"
+            + "\nflair: Prebuilt"
+            + "\nid: iocyre"
+            + "\nexternal_link: https://www.amazon.com/gp/product/B088X2YR3X"
         )
         self.assertEqual(self.mock_post.__str__(), mock_post_string_value)
 
     def test_json(self):
         mock_post_json_value = (
-            '{' +
-            '\n  "title": "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",' +
-            '\n  "link": "/r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/",' +
-            '\n  "flair": "Prebuilt",' +
-            '\n  "id": "iocyre",' +
-            '\n  "external_link": "https://www.amazon.com/gp/product/B088X2YR3X"' +
-            '\n}'
+            "{"
+            + '\n  "title": "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",'
+            + '\n  "link": "/r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/",'
+            + '\n  "flair": "Prebuilt",'
+            + '\n  "id": "iocyre",'
+            + '\n  "external_link": "https://www.amazon.com/gp/product/B088X2YR3X"'
+            + "\n}"
         )
 
         self.assertEqual(self.mock_post.__json__(), mock_post_json_value)
@@ -52,7 +60,7 @@ class TestRedditPost(unittest.TestCase):
             "/r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/",
             "Prebuilt",
             "iocyre",
-            "https://www.amazon.com/gp/product/B088X2YR3X"
+            "https://www.amazon.com/gp/product/B088X2YR3X",
         )
 
         mock_post_not_equal = RedditPost(
@@ -68,13 +76,13 @@ class TestRedditPost(unittest.TestCase):
 
     def test_from_json_self(self):
         mock_post_json_value = (
-            '{' +
-            '\n  "title": "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",' +
-            '\n  "link": "/r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/",' +
-            '\n  "flair": "Prebuilt",' +
-            '\n  "id": "iocyre",' +
-            '\n  "external_link": "https://www.amazon.com/gp/product/B088X2YR3X"' +
-            '\n}'
+            "{"
+            + '\n  "title": "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",'
+            + '\n  "link": "/r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/",'
+            + '\n  "flair": "Prebuilt",'
+            + '\n  "id": "iocyre",'
+            + '\n  "external_link": "https://www.amazon.com/gp/product/B088X2YR3X"'
+            + "\n}"
         )
         self.assertEqual(RedditPost.__from_file__(mock_post_json_value), self.mock_post)
 
@@ -103,7 +111,7 @@ class TestQueryReddit(unittest.TestCase):
     def test_get_json_data(self):
         json_data = query_reddit_posts.get_json_data(self.test_url)
         # this asserts both that the json data has the correct node formatting, and that there are 25 posts
-        self.assertEqual(len(json_data['data']['children']), 25)
+        self.assertEqual(len(json_data["data"]["children"]), 25)
 
     @classmethod
     def get_json_data(cls):
@@ -118,15 +126,23 @@ class TestQueryReddit(unittest.TestCase):
         self.assertEqual(len(all_posts), 25)
 
     def test_get_new_posts(self):
-        posts_zero_through_three = query_reddit_posts.get_new_posts(MOCK_POSTS, MOCK_POSTS[4])
+        posts_zero_through_three = query_reddit_posts.get_new_posts(
+            MOCK_POSTS, MOCK_POSTS[4]
+        )
         self.assertEqual(posts_zero_through_three, MOCK_POSTS[:4])
         # we could use assertRaises here but I want to check that it throws my custom exception
         try:
-            new_posts = query_reddit_posts.get_new_posts(MOCK_POSTS, RedditPost("", "", "", "", ""))
+            new_posts = query_reddit_posts.get_new_posts(
+                MOCK_POSTS, RedditPost("", "", "", "", "")
+            )
         except ValueError as e:
-            self.assertEqual(e.__str__(), "Couldn't find last know post in passed posts list")
+            self.assertEqual(
+                e.__str__(), "Couldn't find last know post in passed posts list"
+            )
 
     def test_get_last_known_post(self):
-        post_from_file = query_reddit_posts.get_last_known_post("testing/mock_last_known_post.json")
+        post_from_file = query_reddit_posts.get_last_known_post(
+            "testing/mock_last_known_post.json"
+        )
         mock_post = MOCK_POSTS[0]
         self.assertEqual(post_from_file, mock_post)
