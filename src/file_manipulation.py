@@ -1,6 +1,5 @@
-from reddit_post import RedditPost
+from src.reddit_post import RedditPost
 from typing import List
-import json
 import jsonpickle
 
 

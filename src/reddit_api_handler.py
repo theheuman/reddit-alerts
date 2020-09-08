@@ -1,14 +1,14 @@
 import requests
 from typing import List
-import file_manipulation
-from reddit_post import RedditPost
+from src import file_manipulation
+from src.reddit_post import RedditPost
 
 
 def get_url(subreddit):
     return "https://www.reddit.com/r/" + subreddit + "/new.json"
 
 
-LAST_KNOWN_POST_FILE_NAME = "last_post.json"
+LAST_KNOWN_POST_FILE_NAME = "src/last_post.json"
 SUBREDDIT = "buildapcsales"
 URL = get_url(SUBREDDIT)
 
@@ -47,9 +47,3 @@ def get_fresh_posts():
     new_posts = get_new_posts(all_posts, last_known_post)
     for post in new_posts:
         print(post)
-
-
-if __name__ == "__main__":
-    get_fresh_posts()
-
-# TODO move pragma no cover statements to configuration file

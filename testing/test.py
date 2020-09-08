@@ -1,10 +1,9 @@
 import unittest
 import jsonpickle
-import requests
-from reddit_post import RedditPost
-import file_manipulation
-import query_reddit_posts
 from typing import List
+from src.reddit_post import RedditPost
+from src.filter import Filter
+from src import file_manipulation, reddit_api_handler
 
 
 def get_mock_posts_from_file(file_name: str) -> List[RedditPost]:
@@ -106,10 +105,10 @@ class TestQueryReddit(unittest.TestCase):
 
     def test_get_url(self):
         subreddit = "buildapcsales"
-        self.assertEqual(self.test_url, query_reddit_posts.get_url(subreddit))
+        self.assertEqual(self.test_url, reddit_api_handler.get_url(subreddit))
 
     def test_get_json_data(self):
-        json_data = query_reddit_posts.get_json_data(self.test_url)
+        json_data = reddit_api_handler.get_json_data(self.test_url)
         # this asserts both that the json data has the correct node formatting, and that there are 25 posts
         self.assertEqual(len(json_data["data"]["children"]), 25)
 
@@ -121,18 +120,18 @@ class TestQueryReddit(unittest.TestCase):
 
     def test_parse_posts_from_json(self):
         json_data = self.get_json_data()
-        all_posts = query_reddit_posts.parse_posts_from_json(json_data)
+        all_posts = reddit_api_handler.parse_posts_from_json(json_data)
         # TODO a better test here
         self.assertEqual(len(all_posts), 25)
 
     def test_get_new_posts(self):
-        posts_zero_through_three = query_reddit_posts.get_new_posts(
+        posts_zero_through_three = reddit_api_handler.get_new_posts(
             MOCK_POSTS, MOCK_POSTS[4]
         )
         self.assertEqual(posts_zero_through_three, MOCK_POSTS[:4])
         # we could use assertRaises here but I want to check that it throws my custom exception
         try:
-            new_posts = query_reddit_posts.get_new_posts(
+            new_posts = reddit_api_handler.get_new_posts(
                 MOCK_POSTS, RedditPost("", "", "", "", "")
             )
         except ValueError as e:
@@ -141,8 +140,36 @@ class TestQueryReddit(unittest.TestCase):
             )
 
     def test_get_last_known_post(self):
-        post_from_file = query_reddit_posts.get_last_known_post(
+        post_from_file = reddit_api_handler.get_last_known_post(
             "testing/mock_last_known_post.json"
         )
         mock_post = MOCK_POSTS[0]
         self.assertEqual(post_from_file, mock_post)
+
+
+class TestFilter(unittest.TestCase):
+    def test_match(self):
+        mock_post = RedditPost(
+            "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",
+            "/r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/",
+            "Prebuilt",
+            "iocyre",
+            "https://www.amazon.com/gp/product/B088X2YR3X",
+        )
+        mock_filter = Filter("12GB", "Prebuilt", "amazon.com")
+        self.assertTrue(mock_filter.matches(mock_post))
+
+        mock_filter = Filter("No Match", "Prebuilt", "amazon.com")
+        self.assertFalse(mock_filter.matches(mock_post))
+
+        mock_filter = Filter("", "Prebuilt", "amazon.com")
+        self.assertTrue(mock_filter.matches(mock_post))
+
+        mock_filter = Filter("", "No Match", "amazon.com")
+        self.assertFalse(mock_filter.matches(mock_post))
+
+        mock_filter = Filter("", "", "amazon.com")
+        self.assertTrue(mock_filter.matches(mock_post))
+
+        mock_filter = Filter("", "", "no match")
+        self.assertFalse(mock_filter.matches(mock_post))
