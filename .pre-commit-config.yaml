@@ -17,4 +17,5 @@ repos:
           name: "Run code coverage"
           types: [file, python]
           entry: coverage run --source=./ -m unittest testing.test
+          language: "python"
 
