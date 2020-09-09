@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import json
 from urllib.parse import urlparse
-from src.filter import Filter
+from src.filter import Filter, SubFilter, Operator
 
 
 def get_domain(url: str):
@@ -31,16 +31,16 @@ class RedditPost:
             + self.external_link
         )
 
-    def matches(self, filter: Filter) -> bool:
-        if filter.title and filter.title.upper() not in self.title.upper():
-            return False
-        if filter.flair and filter.flair.upper() != self.flair.upper():
-            return False
-        if (
-            filter.domain
-            and filter.domain.upper() not in get_domain(self.external_link).upper()
-        ):
-            return False
+    def matches(self, reddit_filter: Filter) -> bool:
+        for sub_filter in reddit_filter.title:
+            if not sub_filter.match(self.title):
+                return False
+        for sub_filter in reddit_filter.flair:
+            if not sub_filter.match(self.flair):
+                return False
+        for sub_filter in reddit_filter.domain:
+            if not sub_filter.match(get_domain(self.external_link)):
+                return False
         return True
 
     def __json__(self):

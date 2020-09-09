@@ -1,10 +1,12 @@
 from src.reddit_api_handler import get_fresh_posts
 from src.reddit_post import RedditPost
-from src.filter import Filter
+from src.filter import Filter, SubFilter, Operator
 
 
 LAST_KNOWN_POST_FILE_NAME = "src/last_post.json"
-mock_filter = Filter("x570", "MOTHERBOARD", "")
+sub_filter_1 = SubFilter(Operator.check_in, "x570")
+sub_filter_2 = SubFilter(Operator.check_in, "MOTHERBOARD")
+mock_filter = Filter("Mock Filter", [sub_filter_1], [sub_filter_2], [])
 
 
 def send_notification(post: RedditPost) -> bool:
@@ -18,7 +20,7 @@ def send_notification(post: RedditPost) -> bool:
 
 
 def matches_filter(post: RedditPost) -> bool:
-    if mock_filter.matches(post):
+    if post.matches(mock_filter):
         return True
     return False
 
