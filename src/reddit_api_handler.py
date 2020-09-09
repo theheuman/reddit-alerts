@@ -44,6 +44,4 @@ def get_fresh_posts():
     json_data = get_json_data(URL)
     all_posts = parse_posts_from_json(json_data)
     last_known_post = get_last_known_post(LAST_KNOWN_POST_FILE_NAME)
-    new_posts = get_new_posts(all_posts, last_known_post)
-    for post in new_posts:
-        print(post)
+    return get_new_posts(all_posts, last_known_post)
