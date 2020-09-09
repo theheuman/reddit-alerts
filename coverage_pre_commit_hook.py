@@ -33,7 +33,7 @@ def main():
             + str(CODE_COVERAGE_GOAL_PERCENTAGE)
             + "% check coverage_html_report/index.html for more information"
         )
-        exit(256)
+        exit(1)
 
 
 if __name__ == "__main__":
