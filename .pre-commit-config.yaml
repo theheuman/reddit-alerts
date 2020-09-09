@@ -9,16 +9,9 @@ repos:
 -   repo: local
     hooks:
         - id: coverage
-          name: "Run code coverage"
+          name: "Run tests and check code coverage"
           types: [file, python]
-          entry: coverage run --source=./src/ -m unittest testing.test
+          entry: python coverage_pre_commit_hook.py
           language: "python"
           always_run: true
-
-        - id: coverage-report
-          name: "Create html coverage report"
-          types: [file, python]
-          entry: coverage html
-          language: "python"
-          always_run: true
-
+          additional_dependencies: ['beautifulsoup4==4.9.1']
