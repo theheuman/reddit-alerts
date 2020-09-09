@@ -1,5 +1,9 @@
 from src.reddit_api_handler import get_fresh_posts
 from src.reddit_post import RedditPost
+from src.filter import Filter
+
+
+mock_filter = Filter("x570", "MOBO", "")
 
 
 def send_notification(post: RedditPost) -> bool:
@@ -13,7 +17,7 @@ def send_notification(post: RedditPost) -> bool:
 
 
 def matches_filter(post: RedditPost) -> bool:
-    if post:
+    if mock_filter.matches(post):
         return True
     return False
 
