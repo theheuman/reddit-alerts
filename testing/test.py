@@ -85,6 +85,32 @@ class TestRedditPost(unittest.TestCase):
         )
         self.assertEqual(RedditPost.__from_file__(mock_post_json_value), self.mock_post)
 
+    def test_match(self):
+        mock_post = RedditPost(
+            "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",
+            "/r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/",
+            "Prebuilt",
+            "iocyre",
+            "https://www.amazon.com/gp/product/B088X2YR3X",
+        )
+        mock_filter = Filter("12GB", "Prebuilt", "amazon.com")
+        self.assertTrue(mock_post.matches(mock_filter))
+
+        mock_filter = Filter("No Match", "Prebuilt", "amazon.com")
+        self.assertFalse(mock_post.matches(mock_filter))
+
+        mock_filter = Filter("", "Prebuilt", "amazon.com")
+        self.assertTrue(mock_post.matches(mock_filter))
+
+        mock_filter = Filter("", "No Match", "amazon.com")
+        self.assertFalse(mock_post.matches(mock_filter))
+
+        mock_filter = Filter("", "", "amazon.com")
+        self.assertTrue(mock_post.matches(mock_filter))
+
+        mock_filter = Filter("", "", "no match")
+        self.assertFalse(mock_post.matches(mock_filter))
+
 
 class TestFileManipulation(unittest.TestCase):
     mock_post = RedditPost(
@@ -148,29 +174,4 @@ class TestQueryReddit(unittest.TestCase):
         self.assertEqual(post_from_file, mock_post)
 
 
-class TestFilter(unittest.TestCase):
-    def test_match(self):
-        mock_post = RedditPost(
-            "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",
-            "/r/buildapcsales/comments/iocyre/prebuilt_acer_aspire_desktop_i510400_12gb_ddr4/",
-            "Prebuilt",
-            "iocyre",
-            "https://www.amazon.com/gp/product/B088X2YR3X",
-        )
-        mock_filter = Filter("12GB", "Prebuilt", "amazon.com")
-        self.assertTrue(mock_filter.matches(mock_post))
-
-        mock_filter = Filter("No Match", "Prebuilt", "amazon.com")
-        self.assertFalse(mock_filter.matches(mock_post))
-
-        mock_filter = Filter("", "Prebuilt", "amazon.com")
-        self.assertTrue(mock_filter.matches(mock_post))
-
-        mock_filter = Filter("", "No Match", "amazon.com")
-        self.assertFalse(mock_filter.matches(mock_post))
-
-        mock_filter = Filter("", "", "amazon.com")
-        self.assertTrue(mock_filter.matches(mock_post))
-
-        mock_filter = Filter("", "", "no match")
-        self.assertFalse(mock_filter.matches(mock_post))
+# class TestFilter(unittest.TestCase):
