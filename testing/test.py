@@ -129,6 +129,7 @@ class TestQueryReddit(unittest.TestCase):
             MOCK_POSTS, MOCK_POSTS[4]
         )
         self.assertEqual(posts_zero_through_three, MOCK_POSTS[:4])
+
         # we could use assertRaises here but I want to check that it throws my custom exception
         try:
             new_posts = reddit_api_handler.get_new_posts(
@@ -140,10 +141,10 @@ class TestQueryReddit(unittest.TestCase):
             )
 
     def test_get_last_known_post(self):
-        post_from_file = reddit_api_handler.get_last_known_post(
-            "testing/mock_last_known_post.json"
-        )
         mock_post = MOCK_POSTS[0]
+        post_from_file = reddit_api_handler.get_last_known_post(
+            "testing/mock_last_known_post.json", mock_post
+        )
         self.assertEqual(post_from_file, mock_post)
 
 

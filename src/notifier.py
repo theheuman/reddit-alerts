@@ -3,6 +3,7 @@ from src.reddit_post import RedditPost
 from src.filter import Filter
 
 
+LAST_KNOWN_POST_FILE_NAME = "src/last_post.json"
 mock_filter = Filter("x570", "MOTHERBOARD", "")
 
 
@@ -23,7 +24,7 @@ def matches_filter(post: RedditPost) -> bool:
 
 
 def main():
-    fresh_posts = get_fresh_posts()
+    fresh_posts = get_fresh_posts(LAST_KNOWN_POST_FILE_NAME)
     for post in fresh_posts:
         if matches_filter(post):
             send_notification(post)

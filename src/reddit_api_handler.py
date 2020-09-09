@@ -8,7 +8,6 @@ def get_url(subreddit):
     return "https://www.reddit.com/r/" + subreddit + "/new.json"
 
 
-LAST_KNOWN_POST_FILE_NAME = "src/last_post.json"
 SUBREDDIT = "buildapcsales"
 URL = get_url(SUBREDDIT)
 
@@ -29,19 +28,19 @@ def parse_posts_from_json(json_data):
 def get_new_posts(posts: List[RedditPost], last_known_post: RedditPost):
     try:
         new_posts = posts[: posts.index(last_known_post)]
-        file_manipulation.update_last_known_post(LAST_KNOWN_POST_FILE_NAME, posts[0])
     except ValueError:
-        # TODO throw error saying we cant find last post
         raise ValueError("Couldn't find last know post in passed posts list")
     return new_posts
 
 
-def get_last_known_post(file_name: str):
-    return file_manipulation.get_last_known_post(file_name)
+def get_last_known_post(file_name: str, new_last_post: RedditPost):
+    last_post = file_manipulation.get_last_known_post(file_name)
+    file_manipulation.update_last_known_post(file_name, new_last_post)
+    return last_post
 
 
-def get_fresh_posts():
+def get_fresh_posts(last_know_post_file_name: str):
     json_data = get_json_data(URL)
     all_posts = parse_posts_from_json(json_data)
-    last_known_post = get_last_known_post(LAST_KNOWN_POST_FILE_NAME)
+    last_known_post = get_last_known_post(last_know_post_file_name, all_posts[0])
     return get_new_posts(all_posts, last_known_post)
