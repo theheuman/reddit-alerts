@@ -5,10 +5,8 @@ The end goal of this project is to push out alerts to an android app when a new 
 It could potentially turn into a [cloudwatch lambda project](https://medium.com/better-programming/cron-job-patterns-in-aws-126fbf54a276)
 
 ## TODO
-- Write notifier file using json
-- make sure code coverage is above some percent
-- turn code coverage in to custom script?
 - move to database?
+- add firebase
 
 ## Development
 This is a python project, create your virual environment and 

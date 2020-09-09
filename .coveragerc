@@ -11,6 +11,7 @@ exclude_lines =
     def write_all_posts
     def get_fresh_posts
     if __name__ == "__main__"
+    def main
 
 [html]
 directory = coverage_html_report

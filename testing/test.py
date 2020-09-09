@@ -4,6 +4,7 @@ from typing import List
 from src.reddit_post import RedditPost
 from src.filter import Filter, SubFilter, Operator
 from src import file_manipulation, reddit_api_handler
+from src import notifier
 
 
 def get_mock_posts_from_file(file_name: str) -> List[RedditPost]:
@@ -261,3 +262,18 @@ class TestQueryReddit(unittest.TestCase):
             "testing/mock_last_known_post.json", mock_post
         )
         self.assertEqual(post_from_file, mock_post)
+
+
+class TestNotifier(unittest.TestCase):
+    mock_post = RedditPost(
+        "The Title", "The Link", "The Flair", "The ID", "The External Link"
+    )
+
+    def test_send_notification(self):
+        self.assertTrue(notifier.send_notification(self.mock_post))
+
+    def test_matches_filter(self):
+        mock_post_does_match = RedditPost("x570", "", "MOTHERBOARD", "", "")
+
+        self.assertFalse(notifier.matches_filter(self.mock_post))
+        self.assertTrue(notifier.matches_filter(mock_post_does_match))
