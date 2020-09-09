@@ -11,7 +11,7 @@ repos:
         - id: coverage
           name: "Run code coverage"
           types: [file, python]
-          entry: coverage run --source=src/ -m unittest testing.test
+          entry: coverage run --source=./src/ -m unittest testing.test
           language: "python"
           always_run: true
 
