@@ -1,10 +1,10 @@
 import os
 from bs4 import BeautifulSoup
 import typer
-from typing import List
+from typing import List, Tuple
 
 
-CODE_COVERAGE_GOAL_PERCENTAGE = 100
+CODE_COVERAGE_GOAL_PERCENTAGE = 80
 
 
 class TerminalColors:
@@ -36,19 +36,20 @@ def get_html(file_name) -> str:
     return file.read()
 
 
-def get_total_percentage(html: str) -> int:
+def passes_total_percentage(html: str, goal_percentage: int) -> bool:
     # now go parse the html lol
     soup = BeautifulSoup(html, "html.parser")
     total_row = soup.find("tr", {"class": "total"})
     total_cell = total_row.find("td", {"class": "right"})
     percent = int(total_cell.text[:-1])
-    return percent
+    return percent >= goal_percentage
 
 
-def get_individual_percentages(html: str) -> dict:
+def passes_individual_percentages(html: str, goal_percentage: int) -> Tuple[bool, dict]:
 
     soup = BeautifulSoup(html, "html.parser")
     percentages = {}
+    passes_percentage = True
 
     individual_rows = soup.find_all("tr", {"class": "file"})
     for row in individual_rows:
@@ -56,8 +57,11 @@ def get_individual_percentages(html: str) -> dict:
         name = name_cell.text
         percentage_cell = row.find("td", {"class": "right"})
         percent = int(percentage_cell.text[:-1])
-        percentages[name] = percent
-    return percentages
+        if percent < goal_percentage:
+            passes_percentage = False
+            percentages[name] = percent
+
+    return passes_percentage, percentages
 
 
 def main(
@@ -70,18 +74,29 @@ def main(
     coverage_html_file = "coverage_html_report/index.html"
     html = get_html(coverage_html_file)
 
-    total_percent = get_total_percentage(html)
-    individual_percentages = get_individual_percentages(html)
-
-    if total_percent < goal_percentage_total:
+    if not passes_total_percentage(html, goal_percentage_total):
         typer.echo(
-            f"\n{TerminalColors.FAIL}Code covered by tests does not exceed {goal_percentage_total}% check coverage_html_report/index.html for more information{TerminalColors.ENDC}"
+            f"\n{TerminalColors.FAIL}Total code coverage is less than {goal_percentage_total}% check coverage_html_report/index.html for more information{TerminalColors.ENDC}"
         )
         exit(1)
-    else:
-        typer.echo(
-            f"\n{TerminalColors.OK_BLUE}Code Coverage Goal Percentage of {goal_percentage_total}% Met!{TerminalColors.ENDC}"
-        )
+
+    typer.echo(
+        f"\n{TerminalColors.OK_BLUE}Total code coverage goal percentage of {goal_percentage_total}% Met!{TerminalColors.ENDC}"
+    )
+
+    passed_check, individual_percentages = passes_individual_percentages(
+        html, goal_percentage_individual
+    )
+    if not passed_check:
+        for file_name, percentage in individual_percentages.items():
+            typer.echo(
+                f"\n{TerminalColors.FAIL}Code coverage in {file_name} is only {percentage}% and does not exceed {goal_percentage_total}% check\n{TerminalColors.OK_GREEN}file://{os.getcwd()}/{coverage_html_file}\a\a{TerminalColors.ENDC}{TerminalColors.FAIL}\nfor more information{TerminalColors.ENDC}"
+            )
+        exit(1)
+
+    typer.echo(
+        f"\n{TerminalColors.OK_BLUE}Individual code coverage goal percentage of {goal_percentage_individual}% Met!{TerminalColors.ENDC}"
+    )
 
 
 if __name__ == "__main__":
