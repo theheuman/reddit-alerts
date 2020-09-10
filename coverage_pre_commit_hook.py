@@ -75,12 +75,12 @@ def main(
 
     if total_percent < goal_percentage_total:
         typer.echo(
-            f"\n{TerminalColors.FAIL}Code covered by tests does not exceed {CODE_COVERAGE_GOAL_PERCENTAGE}% check coverage_html_report/index.html for more information{TerminalColors.ENDC}"
+            f"\n{TerminalColors.FAIL}Code covered by tests does not exceed {goal_percentage_total}% check coverage_html_report/index.html for more information{TerminalColors.ENDC}"
         )
         exit(1)
     else:
         typer.echo(
-            f"\n{TerminalColors.OK_BLUE}Code Coverage Goal Percentage of {CODE_COVERAGE_GOAL_PERCENTAGE}% Met!{TerminalColors.ENDC}"
+            f"\n{TerminalColors.OK_BLUE}Code Coverage Goal Percentage of {goal_percentage_total}% Met!{TerminalColors.ENDC}"
         )
 
 
