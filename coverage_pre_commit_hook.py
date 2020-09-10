@@ -65,7 +65,7 @@ def passes_individual_percentages(html: str, goal_percentage: int) -> Tuple[bool
 
 
 def main(
-    args: List[str],
+    args: List[str],  # need this since pre-commit sends staged files
     goal_percentage_total: int = CODE_COVERAGE_GOAL_PERCENTAGE,
     goal_percentage_individual: int = CODE_COVERAGE_GOAL_PERCENTAGE,
 ):
@@ -76,12 +76,14 @@ def main(
 
     if not passes_total_percentage(html, goal_percentage_total):
         typer.echo(
-            f"\n{TerminalColors.FAIL}Total code coverage is less than {goal_percentage_total}% check coverage_html_report/index.html for more information{TerminalColors.ENDC}"
+            f"\n{TerminalColors.FAIL}Total code coverage is less than {goal_percentage_total}% check "
+            f"coverage_html_report/index.html for more information{TerminalColors.ENDC}"
         )
         exit(1)
 
     typer.echo(
-        f"\n{TerminalColors.OK_BLUE}Total code coverage goal percentage of {goal_percentage_total}% Met!{TerminalColors.ENDC}"
+        f"\n{TerminalColors.OK_BLUE}Total code coverage goal percentage of {goal_percentage_total}% Met!"
+        f"{TerminalColors.ENDC}"
     )
 
     passed_check, individual_percentages = passes_individual_percentages(
@@ -90,12 +92,16 @@ def main(
     if not passed_check:
         for file_name, percentage in individual_percentages.items():
             typer.echo(
-                f"\n{TerminalColors.FAIL}Code coverage in {file_name} is only {percentage}% and does not exceed {goal_percentage_total}% check\n{TerminalColors.OK_GREEN}file://{os.getcwd()}/{coverage_html_file}\a\a{TerminalColors.ENDC}{TerminalColors.FAIL}\nfor more information{TerminalColors.ENDC}"
+                f"\n{TerminalColors.FAIL}Code coverage in {file_name} is only {percentage}% and does not exceed "
+                f"{goal_percentage_individual}% check\n{TerminalColors.OK_GREEN}"
+                f"file://{os.getcwd()}/{coverage_html_file}\a\a{TerminalColors.ENDC}{TerminalColors.FAIL}\nfor more "
+                f"information{TerminalColors.ENDC}"
             )
         exit(1)
 
     typer.echo(
-        f"\n{TerminalColors.OK_BLUE}Individual code coverage goal percentage of {goal_percentage_individual}% Met!{TerminalColors.ENDC}"
+        f"\n{TerminalColors.OK_BLUE}Individual code coverage goal percentage of {goal_percentage_individual}% Met!"
+        f"{TerminalColors.ENDC}"
     )
 
 
