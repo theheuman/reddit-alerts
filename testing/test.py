@@ -273,7 +273,7 @@ class TestNotifier(unittest.TestCase):
         self.assertTrue(notifier.send_notification(self.mock_post))
 
     def test_matches_filter(self):
-        mock_post_does_match = RedditPost("x570", "", "MOTHERBOARD", "wahoo", "")
+        mock_post_does_match = RedditPost("x570", "", "MOTHERBOARD", "wahoo", "2")
 
         self.assertFalse(notifier.matches_filter(self.mock_post))
         self.assertTrue(notifier.matches_filter(mock_post_does_match))
