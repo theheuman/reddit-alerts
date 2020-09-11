@@ -7,6 +7,7 @@ It could potentially turn into a [cloudwatch lambda project](https://medium.com/
 ## TODO
 - move to database?
 - add firebase
+- create ionic app with android
 
 ## Development
 This is a python project, create your virual environment and 
@@ -17,11 +18,10 @@ Then run
 
     pre-commit install
     
-To install the following three pre-commit hooks
+Which will install the following three pre-commit hooks
 
  - black
- - code coverage
- - code coverage report
+ - custom code tester and coverage checker
  
-This will ensure no broken code is submitted, make sure to write tests!
+This will ensure no broken code is submitted, make sure to write tests for code you write!
 
