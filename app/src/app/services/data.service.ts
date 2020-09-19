@@ -78,10 +78,11 @@ export class DataService {
   }
 
   public getMessageById(id: number): Message {
+    this.messages[id].read = true;
     return this.messages[id];
   }
 
   public addMessage(newMessage: Message) {
-    this.messages.push(newMessage)
+    this.messages.push(newMessage);
   }
 }
