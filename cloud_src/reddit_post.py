@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import json
 from urllib.parse import urlparse
-from cloud_src.redditpostalert import RedditPostAlert, Filter, Operator
+from cloud_src.redditpostalert import RedditPostAlert
 
 
 def get_domain(url: str):
@@ -31,15 +31,15 @@ class RedditPost:
             + self.external_link
         )
 
-    def matches(self, reddit_filter: RedditPostAlert) -> bool:
-        for sub_filter in reddit_filter.title:
-            if not sub_filter.match(self.title):
+    def matches(self, reddit_post_alert: RedditPostAlert) -> bool:
+        for post_filter in reddit_post_alert.title_filters:
+            if not post_filter.match(self.title):
                 return False
-        for sub_filter in reddit_filter.flair:
-            if not sub_filter.match(self.flair):
+        for post_filter in reddit_post_alert.flair_filters:
+            if not post_filter.match(self.flair):
                 return False
-        for sub_filter in reddit_filter.domain:
-            if not sub_filter.match(get_domain(self.external_link)):
+        for post_filter in reddit_post_alert.domain_filters:
+            if not post_filter.match(get_domain(self.external_link)):
                 return False
         return True
 
