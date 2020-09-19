@@ -1,0 +1,7 @@
+{
+  "name": "reddit-post-alerts",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
