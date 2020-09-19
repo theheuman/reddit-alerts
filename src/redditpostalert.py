@@ -30,7 +30,7 @@ class SubFilter:
 
 
 @dataclass()
-class Filter:
+class RedditPostAlert:
     name: str
     title: List[SubFilter]
     flair: List[SubFilter]

@@ -2,7 +2,7 @@ import unittest
 import jsonpickle
 from typing import List
 from src.reddit_post import RedditPost
-from src.filter import Filter, SubFilter, Operator
+from src.redditpostalert import RedditPostAlert, SubFilter, Operator
 from src import file_manipulation, reddit_api_handler
 from src import notifier
 
@@ -120,68 +120,68 @@ class TestRedditPost(unittest.TestCase):
         ]
         sub_filter_no_operator = [SubFilter(None, "Doesn't matter")]
 
-        mock_filter_all_match = Filter(
+        mock_filter_all_match = RedditPostAlert(
             "All match", sub_filter_title_in, sub_filter_flair_in, sub_filter_domain_in
         )
-        mock_filter_title_no_match = Filter(
+        mock_filter_title_no_match = RedditPostAlert(
             "Title No Match",
             sub_filter_no_match_in,
             sub_filter_flair_in,
             sub_filter_domain_in,
         )
-        mock_filter_title_empty = Filter(
+        mock_filter_title_empty = RedditPostAlert(
             "Title Empty", sub_filter_empty, sub_filter_flair_in, sub_filter_domain_in
         )
-        mock_filter_flair_no_match = Filter(
+        mock_filter_flair_no_match = RedditPostAlert(
             "Flair No Match",
             sub_filter_empty,
             sub_filter_no_match_in,
             sub_filter_domain_in,
         )
-        mock_filter_title_and_flair_empty = Filter(
+        mock_filter_title_and_flair_empty = RedditPostAlert(
             "Title, Flair Empty",
             sub_filter_empty,
             sub_filter_empty,
             sub_filter_domain_in,
         )
-        mock_filter_domain_no_match = Filter(
+        mock_filter_domain_no_match = RedditPostAlert(
             "Domain No Match",
             sub_filter_empty,
             sub_filter_empty,
             sub_filter_no_match_in,
         )
 
-        mock_filter_title_not_in = Filter(
+        mock_filter_title_not_in = RedditPostAlert(
             "Title Not In", sub_filter_title_not_in, sub_filter_empty, sub_filter_empty
         )
-        mock_filter_title_not_in_fail = Filter(
+        mock_filter_title_not_in_fail = RedditPostAlert(
             "Title Not In Fail",
             sub_filter_title_not_in_fail,
             sub_filter_empty,
             sub_filter_empty,
         )
-        mock_filter_title_equal = Filter(
+        mock_filter_title_equal = RedditPostAlert(
             "Title Equal", sub_filter_title_equal, sub_filter_empty, sub_filter_empty
         )
-        mock_filter_title_equal_fail = Filter(
+        mock_filter_title_equal_fail = RedditPostAlert(
             "Title Equal Fail",
             sub_filter_title_equal_fail,
             sub_filter_empty,
             sub_filter_empty,
         )
-        mock_filter_title_not_equal = Filter(
+        mock_filter_title_not_equal = RedditPostAlert(
             "Title Not Equal",
             sub_filter_title_not_equal,
             sub_filter_empty,
             sub_filter_empty,
         )
-        mock_filter_title_not_equal_fail = Filter(
+        mock_filter_title_not_equal_fail = RedditPostAlert(
             "Title Not Equal Fail",
             sub_filter_title_not_equal_fail,
             sub_filter_empty,
             sub_filter_empty,
         )
-        mock_filter_no_operator = Filter(
+        mock_filter_no_operator = RedditPostAlert(
             "No Operator", sub_filter_no_operator, sub_filter_empty, sub_filter_empty
         )
 
