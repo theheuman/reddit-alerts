@@ -12,7 +12,7 @@ class Operator(Enum):
 
 
 @dataclass()
-class SubFilter:
+class Filter:
     operator: Operator
     text: str
 
@@ -32,6 +32,6 @@ class SubFilter:
 @dataclass()
 class RedditPostAlert:
     name: str
-    title: List[SubFilter]
-    flair: List[SubFilter]
-    domain: List[SubFilter]
+    title: List[Filter]
+    flair: List[Filter]
+    domain: List[Filter]

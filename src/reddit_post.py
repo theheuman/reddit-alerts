@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import json
 from urllib.parse import urlparse
-from src.redditpostalert import RedditPostAlert, SubFilter, Operator
+from src.redditpostalert import RedditPostAlert, Filter, Operator
 
 
 def get_domain(url: str):

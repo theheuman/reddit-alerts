@@ -2,7 +2,7 @@ import unittest
 import jsonpickle
 from typing import List
 from src.reddit_post import RedditPost
-from src.redditpostalert import RedditPostAlert, SubFilter, Operator
+from src.redditpostalert import RedditPostAlert, Filter, Operator
 from src import file_manipulation, reddit_api_handler
 from src import notifier
 
@@ -97,28 +97,28 @@ class TestRedditPost(unittest.TestCase):
             "https://www.amazon.com/gp/product/B088X2YR3X",
         )
         sub_filter_empty = []
-        sub_filter_no_match_in = [SubFilter(Operator.check_in, "No Match")]
-        sub_filter_title_in = [SubFilter(Operator.check_in, "12GB")]
-        sub_filter_flair_in = [SubFilter(Operator.check_in, "Prebuilt")]
-        sub_filter_domain_in = [SubFilter(Operator.check_in, "amazon.com")]
+        sub_filter_no_match_in = [Filter(Operator.check_in, "No Match")]
+        sub_filter_title_in = [Filter(Operator.check_in, "12GB")]
+        sub_filter_flair_in = [Filter(Operator.check_in, "Prebuilt")]
+        sub_filter_domain_in = [Filter(Operator.check_in, "amazon.com")]
 
-        sub_filter_title_not_in = [SubFilter(Operator.check_not_in, "No Match")]
-        sub_filter_title_not_in_fail = [SubFilter(Operator.check_not_in, "12GB")]
+        sub_filter_title_not_in = [Filter(Operator.check_not_in, "No Match")]
+        sub_filter_title_not_in_fail = [Filter(Operator.check_not_in, "12GB")]
         sub_filter_title_equal = [
-            SubFilter(
+            Filter(
                 Operator.check_equals,
                 "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",
             )
         ]
-        sub_filter_title_equal_fail = [SubFilter(Operator.check_equals, "No Match")]
-        sub_filter_title_not_equal = [SubFilter(Operator.check_not_equals, "No Match")]
+        sub_filter_title_equal_fail = [Filter(Operator.check_equals, "No Match")]
+        sub_filter_title_not_equal = [Filter(Operator.check_not_equals, "No Match")]
         sub_filter_title_not_equal_fail = [
-            SubFilter(
+            Filter(
                 Operator.check_not_equals,
                 "[PREBUILT] Acer Aspire Desktop: i5-10400, 12GB DDR4, 512GB SSD, Win 10 - $499.17",
             )
         ]
-        sub_filter_no_operator = [SubFilter(None, "Doesn't matter")]
+        sub_filter_no_operator = [Filter(None, "Doesn't matter")]
 
         mock_filter_all_match = RedditPostAlert(
             "All match", sub_filter_title_in, sub_filter_flair_in, sub_filter_domain_in
