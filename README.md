@@ -10,7 +10,7 @@ It could potentially turn into a [cloudwatch lambda project](https://medium.com/
 - create ionic app with android
 
 ## Development
-This is a python project, create your virual environment and 
+This is a python project, create your virtual environment and 
 
     pip install requirements.txt
     
