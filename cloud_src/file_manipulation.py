@@ -1,4 +1,4 @@
-from src.reddit_post import RedditPost
+from cloud_src.reddit_post import RedditPost
 from typing import List
 import jsonpickle
 import os

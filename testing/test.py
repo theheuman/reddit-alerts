@@ -1,10 +1,10 @@
 import unittest
 import jsonpickle
 from typing import List
-from src.reddit_post import RedditPost
-from src.redditpostalert import RedditPostAlert, Filter, Operator
-from src import file_manipulation, reddit_api_handler
-from src import notifier
+from cloud_src.reddit_post import RedditPost
+from cloud_src.redditpostalert import RedditPostAlert, Filter, Operator
+from cloud_src import file_manipulation, reddit_api_handler
+from cloud_src import notifier
 
 
 def get_mock_posts_from_file(file_name: str) -> List[RedditPost]:

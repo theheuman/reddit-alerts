@@ -20,7 +20,7 @@ class TerminalColors:
 
 def run_coverage():
     typer.echo(f"{TerminalColors.HEADER}Running Code Coverage{TerminalColors.ENDC}\n")
-    exit_code = os.system("coverage run --source=./src/ -m unittest testing.test")
+    exit_code = os.system("coverage run --source=./cloud_src/ -m unittest testing.test")
     if exit_code != 0:
         typer.echo(f"{TerminalColors.FAIL}FAILED! Exiting...{TerminalColors.ENDC}")
         exit(exit_code)

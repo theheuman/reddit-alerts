@@ -1,7 +1,7 @@
 import requests
 from typing import List
-from src import file_manipulation
-from src.reddit_post import RedditPost
+from cloud_src import file_manipulation
+from cloud_src.reddit_post import RedditPost
 
 
 def get_url(subreddit):

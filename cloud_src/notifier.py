@@ -1,9 +1,9 @@
-from src.reddit_api_handler import get_fresh_posts
-from src.reddit_post import RedditPost
-from src.redditpostalert import RedditPostAlert, Filter, Operator
+from cloud_src.reddit_api_handler import get_fresh_posts
+from cloud_src.reddit_post import RedditPost
+from cloud_src.redditpostalert import RedditPostAlert, Filter, Operator
 
 
-LAST_KNOWN_POST_FILE_NAME = "src/last_post.json"
+LAST_KNOWN_POST_FILE_NAME = "cloud_src/last_post.json"
 sub_filter_1 = Filter(Operator.check_in, "x570")
 sub_filter_2 = Filter(Operator.check_in, "MOTHERBOARD")
 mock_filter = RedditPostAlert("Mock Filter", [sub_filter_1], [sub_filter_2], [])
