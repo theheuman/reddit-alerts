@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
-export interface Message {
-  fromName: string;
-  subject: string;
-  date: string;
+export interface PostNotification {
+  subreddit: string;
+  text: string;
+  whatFilterMatched: string;
+  postLink: string;
   id: number;
   read: boolean;
 }
@@ -12,77 +13,37 @@ export interface Message {
   providedIn: 'root'
 })
 export class DataService {
-  public messages: Message[] = [
+  private postNotifications: PostNotification[] = [
     {
-      fromName: 'Matt Chorsey',
-      subject: 'New event: Trip to Vegas',
-      date: '9:32 AM',
+      subreddit: 'buildapcsales',
+      text: '[SSD] WB SN750 Black 1tb $130 ($140-20)',
+      whatFilterMatched: 'ssd',
+      postLink: 'https://www.reddit.com/r/buildapcsales/comments/iwkvim/game_cyberpunk_2077_4994_perorder/',
       id: 0,
       read: false
     },
     {
-      fromName: 'Lauren Ruthford',
-      subject: 'Long time no chat',
-      date: '6:12 AM',
-      id: 1,
-      read: false
-    },
-    {
-      fromName: 'Jordan Firth',
-      subject: 'Report Results',
-      date: '4:55 AM',
-      id: 2,
-      read: false
-    },
-    {
-      fromName: 'Bill Thomas',
-      subject: 'The situation',
-      date: 'Yesterday',
-      id: 3,
-      read: false
-    },
-    {
-      fromName: 'Joanne Pollan',
-      subject: 'Updated invitation: Swim lessons',
-      date: 'Yesterday',
-      id: 4,
-      read: false
-    },
-    {
-      fromName: 'Andrea Cornerston',
-      subject: 'Last minute ask',
-      date: 'Yesterday',
-      id: 5,
-      read: false
-    },
-    {
-      fromName: 'Moe Chamont',
-      subject: 'Family Calendar - Version 1',
-      date: 'Last Week',
-      id: 6,
-      read: false
-    },
-    {
-      fromName: 'Kelly Richardson',
-      subject: 'Placeholder Headhots',
-      date: 'Last Week',
-      id: 7,
+      subreddit: 'buildapcsales',
+      text: '[GPU] PowerColor AMD 5700xt $400 ($450-50)',
+      whatFilterMatched: '5700xt',
+      postLink: 'https://www.reddit.com/r/buildapcsales/comments/iwkvim/game_cyberpunk_2077_4994_perorder/',
+      id:  1,
       read: false
     }
   ];
 
   constructor() { }
 
-  public getMessages(): Message[] {
-    return this.messages;
+  public getPostNotifications(): PostNotification[] {
+    return this.postNotifications;
   }
 
-  public getMessageById(id: number): Message {
-    this.messages[id].read = true;
-    return this.messages[id];
+  public getPostNotificationsById(id: number): PostNotification {
+    this.postNotifications[id].read = true;
+    return this.postNotifications[id];
   }
 
-  public addMessage(newMessage: Message) {
-    this.messages.push(newMessage);
+  public addPostNotifications(newPostNotification: PostNotification) {
+    this.postNotifications.push(newPostNotification);
   }
 }

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
-import { MessageComponentModule } from '../message/message.module';
+import { MessageComponentModule } from '../post-notification/post-notification.module';
 
 @NgModule({
   imports: [

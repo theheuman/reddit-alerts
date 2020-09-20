@@ -1,21 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { MessageComponentModule } from '../post-notification/post-notification.module';
 
-import { HomePage } from './home.page';
+import { PostNotificationComponent } from './post-notification.component';
 
-describe('HomePage', () => {
-  let component: HomePage;
-  let fixture: ComponentFixture<HomePage>;
+describe('MessageComponent', () => {
+  let component: PostNotificationComponent;
+  let fixture: ComponentFixture<PostNotificationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePage ],
-      imports: [IonicModule.forRoot(), MessageComponentModule, RouterModule.forRoot([])]
+      declarations: [ PostNotificationComponent ],
+      imports: [IonicModule.forRoot(), RouterModule.forRoot([])]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomePage);
+    fixture = TestBed.createComponent(PostNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
